@@ -1,63 +1,55 @@
-DATA 622 # hw2
+Critical Thinking (2 points total) Modify this ReadMe file to answer the following questions directly in place.
 
-	Assigned on September 27, 2018
-	Due on October 17, 2018 11:59 PM EST
-15 points possible, worth 15% of your final grade
 
-Required Reading
+i.Kaggle changes links/ file locations/login process/ file content
+The problem for users is difficulty / fail to access the original data sets, when the system fetching the old link. 
+Now, Kaggle has set up “Input Files” in Kaggle Kernels. Kaggle Kernels can directly load the data sets, also able to use R / Python to practice ML models. Kaggle Kernels has been created to solve this problem.  Users don’t need to download data sets in local space, directly accessing the data/meta data through Kaggle website. It has much more convenience for user without problem loading big data sets into their local hard drive.  
+https://www.kaggle.com/dansbecker/finding-your-files-in-kaggle-kernels
 
-	Read Chapter 5 of the Deep Learning Book
-	Read Chapter 1 of the Agile Data Science 2.0 textbook
 
-Data Pipeline using Python (13 points total)
 
-Build a data pipeline in Python that downloads data using the urls given below, trains a random forest model on the training dataset using sklearn and scores the model on the test dataset.
+ii.We run out of space on HD / local permissions issue - can't save files
+Apache Hadoop is a collection of open-source software utilities that facilitate using a network of many computers to solve problems involving massive amounts of data and computation. t provides a software frame work for distributed storage and processing of big data using the MapReduce programming model. 
+However, The model training process in big data machine learning is both computation- and memory-intensive. Many parallel machine learning algorithms consist of iterating a computation over a training dataset and updating the related model parameters until the model converges. In the Big Data era, both the volume of a dataset and the number of model parameters can be huge. To accelerate the performance of the iterative computation, it’s common to cache the training data and model parameters into memory. However, due to the limitations of memory, in many scenarios, it might not all fit. It’s a challenge to run machine learning training algorithms efficiently with memory constraints.
+Apache Spark started in 2009 as a research project at UC Berkley’s AMPLab, a collaborate on involving students, researchers, and faculty, focused on data-intensive application domains. The goal of Spark was to create a new framework, optimized for fast iterative processing like machine learning, and interactive data analysis, while retaining the scalability, and fault tolerance of Hadoop MapReduce. 
+Spark is an open source framework focused on interactive query, machine learning, and real-time workloads. It does not have its own storage system, but runs analytics on other storage systems like HDFS, or other popular stores like Amazon Redshift, Amazon S3, Couchbase, Cassandra, and others. Spark on Hadoop leverages YARN to share a common cluster and dataset as other Hadoop engines, ensuring consistent levels of service, and response.
 
-Scoring Rubric
+https://en.wikipedia.org/wiki/Apache_Hadoop
+https://medium.com/@Petuum/a-solution-to-the-memory-limit-challenge-in-big-data-machine-learning-49783a72088b
+https://aws.amazon.com/big-data/what-is-spark/?trk=ps_a131L000005ivBSQAY&trkCampaign=pac_emr_webpage_big_data_what%27s_spark&sc_channel=ps&sc_campaign=pac_q2-04-2018_emr_paid_search&sc_outcome=Product_Adoption_Campaigns&sc_geo=NAMER&sc_country=mult&sc_publisher=Google&sc_medium=PAC-PaaS-P|PS-GO|Non-Brand|Desktop|PA|Analytics|EMR|US|EN|Text&s_kwcid=AL!4422!3!301096469481!p!!g!!big%20data&ef_id=W3OMpwAAAI7aSGvT:20181013202256:s
 
-The homework will be scored based on code efficiency (hint: use functions, not stream of consciousness coding), code cleaniless, code reproducibility, and critical thinking (hint: commenting lets me know what you are thinking!)
-Instructions:
 
-Submit the following 5 items on github.
 
-ReadMe.md (see "Critical Thinking")
-requirements.txt
-pull_data.py
-train_model.py
-score_model.py
 
-More details:
-requirements.txt (1 point)
-This file documents all dependencies needed on top of the existing packages in the Docker Dataquest image from HW1. When called upon using pip install -r requirements.txt , this will install all python packages needed to run the .py files. (hint: use pip freeze to generate the .txt file)
+iii.Someone updated python packages and there is unintended effect (functions retired or act differently)
+A side effect refers simply to the modification of some kind of state - for instance:
+•Changing the value of a variable;
+•Writing some data to disk;
+•Enabling or disabling a button in the User Interface.
+Contrary to what some people seem to be saying:
+•A side effect does not have to be hidden or unexpected (it can be, but that has nothing to do with the definition as it applies to computer science);
+•A side effect has nothing to do with idempotency. An idempotent function can have side effects, and a non-idempotent function may have no side effects (such as getting the current system date and time).
 
-pull_data.py (5 points)
-When this is called using python pull_data.py in the command line, this will go to the 2 Kaggle urls provided below, authenticate using your own Kaggle sign on, pull the two datasets, and save as .csv files in the current local directory. The authentication login details (aka secrets) need to be in a hidden folder (hint: use .gitignore). There must be a data check step to ensure the data has been pulled correctly and clear commenting and documentation for each step inside the .py file.
-Training dataset url: https://www.kaggle.com/c/titanic/download/train.csv
-Scoring dataset url: https://www.kaggle.com/c/titanic/download/test.csv
+https://softwareengineering.stackexchange.com/questions/40297/what-is-a-side-effect
 
-train_model.py (5 points)
-When this is called using python train_model.py in the command line, this will take in the training dataset csv, perform the necessary data cleaning and imputation, and fit a classification model to the dependent Y. There must be data check steps and clear commenting for each step inside the .py file. The output for running this file is the random forest model saved as a .pkl file in the local directory. Remember that the thought process and decision for why you chose the final model must be clearly documented in this section.
-eda.ipynb (0 points)
 
-[Optional] This supplements the commenting inside train_model.py. This is the place to provide scratch work and plots to convince me why you did certain data imputations and manipulations inside the train_model.py file.
+iv.Docker issues - lost internet within docker due to some ip binding to vm or local routing issues( I guess this falls under lost internet, but I am talking more if docker is the cause rather then ISP)
+•Docker containers can connect to the outside world without further configuration, but the outside world cannot connect to Docker containers by default. A bridge network is created (with the name bridge) when you install Docker. Every outgoing connection appears to originate from the host’s IP space; Docker creates a custom iptables masquerading rule.
+•“standard Masq-HOWTO describes how to enable the Linux IP Masquerade feature on a given Linux host. IP Masq is a form of Network Address Translation or NAT that allows internally networked computers that do not have one or more registered Internet IP addresses to have the ability to communicate to the Internet via your Linux boxes single Internet IP address.”
+•http://www.tldp.org/HOWTO/html_single/Masquerading-Simple-HOWTO/
+•someone posted a solution for binding to VM docker-machine on stackoverflow:
+•Here are some details to help those confused about adding a NIC to the VM in VirtualBox. I have only used VirtualBox for this and cannot advise about other virtualization system configurations.
+•Stop the VM by selecting it in the VM Manager and using the right-click menu or pressing 'command-F'.
+•Click "Settings".
+•Click "Network".
+•Select one of the Adapters that is not currently enabled.
+•Enable it.
+•Select "Bridged Adapter" in the "Attached to" selection.
+•Click OK.
+•Start your VM and try it out.
+https://stackoverflow.com/questions/33021581/how-to-bind-the-vm-docker-machine-creates-to-osx-ip-address
 
-score_model.py (2 points)
-When this is called using python score_model.py in the command line, this will ingest the .pkl random forest file and apply the model to the locally saved scoring dataset csv. There must be data check steps and clear commenting for each step inside the .py file. The output for running this file is a csv file with the predicted score, as well as a png or text file output that contains the model accuracy report (e.g. sklearn's classification report or any other way of model evaluation).
 
-Critical Thinking (2 points total)
-Modify this ReadMe file to answer the following questions directly in place.
-I would put in checks to make sure the number of columns and the data types match the format so that the processes that wrangles the data later on before running ml part does not break. Maybe add a check of file to make sure it is not corrupt and is readable after the merge(Not sure how much of a problem this actually is, but this would not hurt). Also the way my scripts work right now, is I have statically specified where the NaN values are and I am handling them per case, since we do not know what data we will get, a more robust method of detecting and dealing with NaN values will be needed.
 
-Kaggle changes links/ file locations/login process/ file content
-We run out of space on HD / local permissions issue - can't save files
 
-Someone updated python packages and there is unintended effect (functions retired or act differently)
-Docker issues - lost internet within docker due to some ip binding to vm or local routing issues( I guess this falls under lost internet, but I am talking more if docker is the cause rather then ISP)
 
-We would need some kind of back engine like Hadoop or Spark to handle the data. Also we will need ability to process data in chunks, data pull would need to be done in chunks, with further checks, processing in chunks and so on, also I would probably separate pipeline into more steps(scripts), for example I would take all the data wrangling parts into a separate scripts. If we have too much data to process we can't have multiple steps run at the same time as each one of those steps will be cpu and time consuming, so each step will have to be separated with more reporting/logging added in between each step. Trillion records sounds like a lot, so I would probably put some effort into monitoring of resources during the time my jobs run, With trillion records something will break sooner or later and if we have good overview of systems performance it will help with troubleshooting a lot.
-
-I would add a cron job to check for differences daily, something like an rsync should get the job done, by checking if there is a change and pulling only the differences. Also if there is daily processing we will preferably need a more complex dependency based system where you check if last days jobs have completed successfully before moving on to the next day Same goes for steps within a day each one depends on completion of the other not just time based cron jobs. Alerts ( email/texts) will be critical to have in place, they will be notifying successful completion of jobs or alert about a problem.
-
-Please make sure you press enter when running last script, The output was pretty odd inside my docker container so I show part of output then, you hit enter then script will output the rest.
-
-Also, if you use the wrong login/pass, you will have to delete login file. If file exists, it will just use whatever is in the file.
