@@ -59,10 +59,10 @@ model_scores.append(round(roc_auc_score(y, predicted),10))
 
 names.append("RandomForestRegressor")
 models.append(RandomForestRegressor(n_estimators=1000, oob_score=True, n_jobs=-1, random_state=42, max_features="auto", min_samples_leaf = 8))
-Regressor=models[-1]
-Regressor.fit(x,y)
-predicted=regressor.predict(x)
-model_scores.append(round(roc_auc_score(y, predicted),10))
+rfRegressor=models[-1]
+rfRegressor.fit(x,y)
+rfpredicted=rfRegressor.predict(x)
+model_scores.append(round(roc_auc_score(y, rfpredicted),10))
 
 
 scoredf=pd.DataFrame(list(zip(names,model_scores)),columns=['names','model_scores'])
@@ -74,15 +74,15 @@ scoredf.to_csv('score.csv', index=False)
 #2                Naive Bayes  0.770961
 #3                        SVM  0.795743
 #4  GradientBoostingRegressor  0.919452
-#5      RandomForestRegressor  0.919452
+#5      RandomForestRegressor  0.913431
 
 #Lookup the max score postion
-#position=model_scores.index(max(model_scores))
+position=model_scores.index(max(model_scores))
 
 
 #use pickle to save best model
 model_pkl=open("best_model.pickle","wb")
-pickle.dump(models[5],model_pkl)
+pickle.dump(models[position],model_pkl)
 model_pkl.close()
 
 #the final submition csv
